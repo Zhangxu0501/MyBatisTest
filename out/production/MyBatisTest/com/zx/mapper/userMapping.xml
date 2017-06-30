@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.mapper.usersMapping">
+    <select id="getUser" parameterType="int"
+            resultType="com.zx.mapper.User">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.zx.mapper.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user() VALUES (#{id},#{uname},#{passwd})
+    </insert>
+
+    <insert id="addMutiUser" parameterType="com.zx.mapper.User" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO user() VALUES
+        <foreach item="item" collection="list" separator=",">
+        (#{id},#{item.uname}, #{item.passwd})
+        </foreach>
+    </insert>
+    
+    <update id="updateUser" parameterType="com.zx.mapper.User">
+      UPDATE user set passwd=#{passwd},uname=#{uname} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="com.zx.mapper.User">
+        DELETE FROM user where id=#{id}
+    </delete>
+</mapper>

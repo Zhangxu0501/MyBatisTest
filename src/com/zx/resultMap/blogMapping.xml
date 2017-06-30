@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.mapper.usersMapping">
+    <resultMap id="BlogResult" type="com.zx.resultMap.Blog">
+    <id column="id" property="id"/>
+        <result column="title" property="title"></result>
+        <result column="owner" property="owner"></result>
+        <result column="content" property="content"></result>
+    </resultMap>
+
+    <select id="getBlog" resultMap="BlogResult" parameterType="int">
+        SELECT * FROM blog WHERE id=#{id}
+    </select>
+    
+    <select id="getComment" resultMap="CommentMap">
+        select * form comment WHERE id=#{id}
+    </select>
+
+    <resultMap id="CommentMap" type="com.zx.resultMap.Commnet">
+        <id column="id" property="id"></id>
+        <result column="comment" property="comment"/>
+        <association property="blog" column="blog" javaType="com.zx.resultMap.Blog" select="getBlog"/>
+
+    </resultMap>
+</mapper>
