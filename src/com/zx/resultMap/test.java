@@ -26,8 +26,6 @@ public class test {
         System.out.println(b);
 
 
-        //带引用的result Map测试
-
 
 
     }
